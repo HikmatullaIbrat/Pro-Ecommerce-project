@@ -1,0 +1,6 @@
+1. Avoiding two or more users with same usernames and emails
+2. Adding static files with css style and images and making a new directory( static_cdn) 
+3. After every change to static dirctory(images and styles) running the command ->  python manage.py collectstatic
+4. creating Forms with django without need of models but still question is do we need models for users
+but 
+second question is the method of handling static files in production mode.

@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts',
-    'pages'
+    
    
 ]
 
@@ -120,9 +119,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+import os.path
+STATIC_URL = '/static-abd/' # we brought change but it worked because of making static_cdn with collectstatic command
+#both ways of 125 and 126 can be used
+#STATICFILES_DIRS = (os.path.join('static'),) 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_my_proj')
+]
+
+# get all the files from static_my_proj and store it on static_cdn
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn', 'static_root') 
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home_page'
+LOGOUT_REDIRECT_URL = 'index'

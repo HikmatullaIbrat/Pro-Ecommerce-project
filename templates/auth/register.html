@@ -1,0 +1,6 @@
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!--we can use both methods which are in this way or in login page for form loading-->
+   
+    <button type="submit" class="btn btn-secondary">send</button>
+</form>

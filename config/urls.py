@@ -18,8 +18,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+from .views import home_page, about_page, product_page, contact_page, login_page, register_page
 urlpatterns = [
     path('admin/' , admin.site.urls),
     #path('', include ('pages.urls')), 
-    path('', include('posts.urls'))
+    path(r'', home_page, name = 'index'),
+    path(r'about/', about_page),
+    path('products/', product_page),
+    path('contact/',contact_page),
+    path('login/',login_page , name='login'),
+    path('register/',register_page, name = 'register')
+
 ]
+
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL , document_root  = settings.MEDIA_ROOT)
