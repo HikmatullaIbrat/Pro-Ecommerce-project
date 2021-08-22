@@ -18,10 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
+# should'nt be used on Production
 from django.conf import settings
 from django.conf.urls.static import static
 
 from .views import home_page, about_page, product_page, contact_page, login_page, register_page
+
+from products.views import product_list_view, ProductListView , ProductDetailView, product_Detail_view
 urlpatterns = [
     path('admin/' , admin.site.urls),
     #path('', include ('pages.urls')), 
@@ -30,7 +33,16 @@ urlpatterns = [
     path('products/', product_page),
     path('contact/',contact_page),
     path('login/',login_page , name='login'),
-    path('register/',register_page, name = 'register')
+    path('register/',register_page, name = 'register'),
+
+
+    # for products list template
+    path('products-fbv/', product_list_view), # function based view of products,
+    path('products-cl/', ProductListView.as_view()),
+
+    # for products Detail template
+    path('products-fbv/<pk>/',product_Detail_view, name ='detail'),
+    path('products-cl/<pk>/', ProductDetailView.as_view(), name = 'detail')
 
 ]
 

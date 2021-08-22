@@ -4,3 +4,15 @@
 4. creating Forms with django without need of models but still question is do we need models for users
 but 
 second question is the method of handling static files in production mode.
+
+    # Using the database shell : python manage.py shell
+    #1 then import the model:from   appname.models import classname -> from taskMan.models import taskDb
+        #2. class name which used for database : like in this practice -> TaskDb
+        #3. to dispaly all othe object   ClassName.objects.all() 
+        #4. to enter a value in database  : entry = TaskDb(task = 'clean shoes') and the entry.save
+        #5. to show first or last object : all = className.objects.all()-> all.first() or all.last() 
+        # or we can  use all[0]...
+        #6. or getting by id    all.get(id = 1)
+        #7. for deleting an item : all.first().delete() , all.last().delete() or manually all[0].delete()
+        #8. if we want to manipulate the database with super suer we have to register our model on admin.py
+         

@@ -4,6 +4,9 @@ from django.http import HttpResponse
 
 from .forms import ContactForm, LoginForm, RegisterationForm
 
+
+# View for Login and registration and 
+
 def home_page(request):
     #return HttpResponse('<h1>Hello world!</h1>')
     content = 'Hello Afghanistan'  
