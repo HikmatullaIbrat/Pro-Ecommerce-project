@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 # Create your views here.
-from .models import Product
+from .models import Product, ProductManager
 from django.views.generic import ListView , DetailView
 
 
@@ -62,4 +62,22 @@ def product_Detail_view(request,pk):
     #return render(request , 'index.html',Product_list)
     return render (request, 'product/detail.html',Product_list)
 
- 
+
+
+#class based view for feature list products
+class FeaturedProductsListView(ListView):
+    template_name = 'product/feature_list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.featured()
+
+
+# class base view for feature products' details
+
+class FeaturedProductsDetailView(DetailView):
+    template_name = 'product/feature.html'
+    
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.featured()

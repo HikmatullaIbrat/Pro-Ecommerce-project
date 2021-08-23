@@ -28,12 +28,14 @@ def upload_image_path(instance, filename):
         final_filename = final_filename
     )
 
-#class ProductManager(models.Manager):
-  #  def get_by_id(self,id):
-   #     qs = self.get_queryset().filter(id = id) #Product.objects == self.get_queryset()
-    #    if qs.count() ==1:
-     #       return qs.first()
-      #  return None
+class ProductManager(models.Manager):
+    def featured(self):
+        return self.get_queryset().filter(featured = True)
+    def get_by_id(self,id):
+        qs = self.get_queryset().filter(id = id) #Product.objects == self.get_queryset()
+        if qs.count() ==1:
+            return qs.first()
+        return None
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
@@ -46,8 +48,12 @@ class Product(models.Model):
     # After installing the Pillow run the makemigrations and migrate commands
     # but still something this technic is not allowed for large file upload
     image = models.FileField(upload_to= upload_image_path, null = True, blank = True)
+
+    featured = models.BooleanField(default=False )
+
+
     
-   # object = ProductManager()
+    objects = ProductManager()
 
     def __str__(self):
         return self.title   

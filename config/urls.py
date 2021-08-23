@@ -24,7 +24,15 @@ from django.conf.urls.static import static
 
 from .views import home_page, about_page, product_page, contact_page, login_page, register_page
 
-from products.views import product_list_view, ProductListView , ProductDetailView, product_Detail_view
+from products.views import (
+    product_list_view,  
+    ProductListView ,
+    ProductDetailView,
+    product_Detail_view,
+    FeaturedProductsDetailView,
+    FeaturedProductsListView
+)
+
 urlpatterns = [
     path('admin/' , admin.site.urls),
     #path('', include ('pages.urls')), 
@@ -42,7 +50,11 @@ urlpatterns = [
 
     # for products Detail template
     path('products-fbv/<pk>/',product_Detail_view, name ='detail'),
-    path('products-cl/<pk>/', ProductDetailView.as_view(), name = 'detail')
+    path('products-cl/<pk>/', ProductDetailView.as_view(), name = 'detail'),
+
+    # for Featured products 
+    path('featured-products/',FeaturedProductsListView.as_view()),
+    path('featured-products/<pk>/', FeaturedProductsDetailView.as_view(), name='feature')
 
 ]
 

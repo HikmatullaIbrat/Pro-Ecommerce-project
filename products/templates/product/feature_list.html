@@ -4,21 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Products Detail</title>
+    <title>Featured List</title>
 </head>
 <body>
-  
+    {%for item in object_list%}
     <ul>
-        
-        <li>{{object.title}}
-            <p>{{object.description}}</p>
-            <p>{{object.price}}</p>
-            {% if object.image%}
-            <img src="{{ object.image.url }}" alt="">
-            {%endif%}
+        <li>
+            <a href="{% url 'feature' item.id%}">{{item}}</a>
         </li>
         
     </ul>
     
+
+    {% endfor %}
 </body>
 </html>
