@@ -37,9 +37,15 @@ class ProductManager(models.Manager):
             return qs.first()
         return None
 
+
+# Product table  components
 class Product(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
+
+     # slug field to show the product  name on url
+    slug = models.SlugField(default= 'just_some_name', blank= True, unique=True)
+    
     # those two arguments are required on Decimal field and we can set null = True but default is better
     price = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
 
@@ -47,9 +53,12 @@ class Product(models.Model):
     # Pillow should be downloaded with python -m pip install Pillow
     # After installing the Pillow run the makemigrations and migrate commands
     # but still something this technic is not allowed for large file upload
-    image = models.FileField(upload_to= upload_image_path, null = True, blank = True)
+    # pillow installed
+    image = models.ImageField(upload_to= upload_image_path, null = True, blank = True)
 
     featured = models.BooleanField(default=False )
+    
+   
 
 
     

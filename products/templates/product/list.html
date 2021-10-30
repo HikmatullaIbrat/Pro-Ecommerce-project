@@ -10,7 +10,7 @@
     {%for item in object_list%}
     <ul>
         <li>
-            <a href="{% url 'detail' item.id%}">{{item}}</a>
+            <a href="{% url 'detail' item.slug%}">{{item}}</a>
         </li>
         
     </ul>

@@ -32,8 +32,8 @@ class ProductDetailView(DetailView):
     template_name = 'product/detail.html'
 
 
-    """This code is just for recognizing that how we can get the data with which name 
-    Which in this place it show (object) and that's why we retrieved the data with object : like
+    """This code is just for recognizing that how we can get the data with which name,
+    Which in this place it shows (object) and that's why we retrieved the data with object : like
     object.title or object.description"""
     def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
@@ -73,7 +73,7 @@ class FeaturedProductsListView(ListView):
         return Product.objects.featured()
 
 
-# class base view for feature products' details
+# class base view for featured products' details with their identity number on url
 
 class FeaturedProductsDetailView(DetailView):
     template_name = 'product/feature.html'
@@ -81,3 +81,24 @@ class FeaturedProductsDetailView(DetailView):
     def get_queryset(self, *args, **kwargs):
         request = self.request
         return Product.objects.featured()
+
+
+# class for showing products with their names on url
+class ProductDetailSlugView(DetailView):
+    queryset = Product.objects.all()
+    template_name = 'product/detail.html'
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+
+        try:
+            instance = Product.objects.get(slug = slug, active=True)
+        except Product.DoesNotExist:
+            raise Http404('Not found')
+        except Product.MultipleObjectsReturned:
+            qs = Product.objects.filter(slug = slug , active = True)
+            instance = qs.first()
+        except:
+            raise Http404('so may it exists')
+        return instance

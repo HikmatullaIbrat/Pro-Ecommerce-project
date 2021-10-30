@@ -122,10 +122,10 @@ USE_TZ = True
 import os.path
 STATIC_URL = '/static-abd/' # we brought change but it worked because of making static_cdn with collectstatic command
 #both ways of 125 and 126 can be used
-#STATICFILES_DIRS = (os.path.join('static'),) 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static_my_proj')
-]
+STATICFILES_DIRS = (os.path.join('static'),) 
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static_my_proj')
+# ]
 
 # get all the files from static_my_proj and store it on static_cdn
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn', 'static_root') 
