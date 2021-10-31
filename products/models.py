@@ -44,7 +44,7 @@ class Product(models.Model):
     description = models.TextField()
 
      # slug field to show the product  name on url
-    slug = models.SlugField(default= 'just_some_name', blank= True, unique=True)
+    slug = models.SlugField(default= 'just_some_name')
     
     # those two arguments are required on Decimal field and we can set null = True but default is better
     price = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)

@@ -50,7 +50,7 @@ urlpatterns = [
     path('products-cl/', ProductListView.as_view()),
 
     # for products Detail template
-    #path('products-fbv/<pk>/',product_Detail_view, name ='detail'),
+    path('products-fbv/<pk>/',product_Detail_view, name ='detail'),
     #path('products-cl/<pk>/', ProductDetailView.as_view(), name = 'detail'),
 
     # for Featured products 
@@ -58,7 +58,7 @@ urlpatterns = [
     path('featured-products/<pk>/', FeaturedProductsDetailView.as_view(), name='feature'),
 
     # path for adding slug view
-    path(r'^products-cl/(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view(), name = 'detail')
+    #path(r'^products-cl/(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view(), name = 'detail')
 
 
 
