@@ -10,7 +10,10 @@
     {%for item in object_list%}
     <ul>
         <li>
-            <a href="{% url 'feature' item.id%}">{{item}}</a>
+            <!-- that first href commented line's value which is an ID, will be still passed but won't be shown-->
+            <!-- so we can use it to pass a value hidely -->
+            <!-- <a href="{% url 'feature' item.id%}">{{item}}</a> -->
+            <a href="{% url 'feature' item.slug%}">{{item}}</a>
         </li>
         
     </ul>

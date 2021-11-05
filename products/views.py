@@ -93,11 +93,11 @@ class ProductDetailSlugView(DetailView):
         slug = self.kwargs.get('slug')
 
         try:
-            instance = Product.objects.get(slug = slug)
+            instance = Product.objects.get(slug = slug,active = True)
         except Product.DoesNotExist:
             raise Http404('Not found')
         except Product.MultipleObjectsReturned:
-            qs = Product.objects.filter(slug = slug )
+            qs = Product.objects.filter(slug = slug , active = True)
             instance = qs.first()
         except:
             raise Http404('so may it exists')
