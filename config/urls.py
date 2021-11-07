@@ -27,13 +27,13 @@ from .views import home_page, about_page, product_page, contact_page, login_page
 urlpatterns = [
     path('admin/' , admin.site.urls),
     #path('', include ('pages.urls')), 
-    path(r'', home_page, name = 'index'),
-    path(r'about/', about_page),
+    path(r'', home_page, name = 'home'),
+    path(r'about/', about_page, name='about'),
     #path('products/', product_page),
-    path('contact/',contact_page),
+    path('contact/',contact_page,name = 'contact'),
     path('login/',login_page , name='login'),
     path('register/',register_page, name = 'register'),
-    path('products/',include('products.urls')),
+    path(r'products/',include(('products.urls','products'),namespace='products')),
 
 ]
 

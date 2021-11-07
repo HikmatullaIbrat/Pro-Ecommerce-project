@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>rendering</title>
+    {%include 'base/css.html'%}
+   
+    <!-- the block for a css page which relates to a specific page if needed-->
+    {% block manual_css_for_page %} {% endblock %}
+</head>
+<body>
+   {%include 'base/navbar.html' with brand_name='eccomerce'%}
+   {%block content%}
+   
+   {%endblock%}
+   {%include 'base/js.html'%}
+</body>
+</html>

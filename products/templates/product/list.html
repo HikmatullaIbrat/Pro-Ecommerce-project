@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Products List</title>
-</head>
-<body>
-    {%for item in object_list%}
-    <ul>
-        <li>
-            <a href="{% url 'detail' item.slug%}">{{item}}</a>
-        </li>
-        
-    </ul>
-    
+{% extends 'base.html' %}
 
-    {% endfor %}
-</body>
-</html>
+  {%block content%}
+    <div class="container">
+        <div class="row">
+            
+            {% for item in object_list %}
+
+            <div class="col">
+                {% include 'product/listcard/card.html' with instance=item%}
+                <!-- <a href="{% url 'products:detail' item.slug%}">{{item}}</a> -->
+            </div>
+            {%endfor%}
+        </div> <!--row-->
+    </div> <!--container-->
+  {%endblock%}

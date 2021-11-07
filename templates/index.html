@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>rendering</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% load static %}
+{%block manual_css_for_page %}
+<link rel="stylesheet" href="{% static 'css/manual.css' %}">
+{%endblock%}
+
+{%block content%}
     <!--<h1>#{{object_list}}</h1>-->
     <h4>Hello by templates</h4>
     <h4>{{firstName}}</h4>
     <h5>{{content}}</h5>
     <h5>{{product_name}}</h5>
+    <p>changing the color</p>
 
     {% if request.user.is_authenticated %}
     <h5>{{premium_content}}</h5>
 
     {% endif %}
-    
-</body>
-</html>
+{%endblock content%}
