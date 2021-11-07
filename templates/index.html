@@ -1,11 +1,13 @@
 {% extends 'base.html'%}
 {% load static %}
 {%block manual_css_for_page %}
-<link rel="stylesheet" href="{% static 'css/manual.css' %}">
+    <link rel="stylesheet" href="{% static 'css/manual.css' %}">
+    <title>Home</title>
 {%endblock%}
 
 {%block content%}
-    <!--<h1>#{{object_list}}</h1>-->
+   <div class="container" style = "margin-top: 5rem;">
+        <!--<h1>#{{object_list}}</h1>-->
     <h4>Hello by templates</h4>
     <h4>{{firstName}}</h4>
     <h5>{{content}}</h5>
@@ -16,4 +18,5 @@
     <h5>{{premium_content}}</h5>
 
     {% endif %}
+   </div>
 {%endblock content%}

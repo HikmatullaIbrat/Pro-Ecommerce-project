@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Featured List</title>
-</head>
-<body>
-    {%for item in object_list%}
-    <ul>
-        <li>
-            <!-- that first href commented line's value which is an ID, will be still passed but won't be shown-->
-            <!-- so we can use it to pass a value hidely -->
-            <!-- <a href="{% url 'products:feature' item.id%}">{{item}}</a> -->
-            <!--  -->
-            <!-- Defining a func like get_absolute_url is more effecient for getting items with
-            having regex expressions on their urls and this func should be defined on model's class
-            with using reverse func, both get_absolute_url and product:feature works same-->
-            <!-- <a href="{{item.get_absolute_url}}">{{item}}</a> -->
-            <a href="{% url 'products:feature' item.slug%}">{{item}}</a>
-        </li>
-        
-    </ul>
+{% extends 'base.html' %}
+{% load static %}
+{%block manual_css_for_page %}
+    <title>Featured Products</title>
+{%endblock%}
+
+ {% block content %}
+    <div class="container" style = "margin-top: 5rem;">
+     {%for item in object_list%}
+        <ul>
+            <li>
+                <!-- that first href commented line's value which is an ID, will be still passed but won't be shown-->
+                <!-- so we can use it to pass a value hidely -->
+                <!-- <a href="{% url 'products:feature' item.id%}">{{item}}</a> -->
+                <!--  -->
+                <!-- Defining a func like get_absolute_url is more effecient for getting items with
+                having regex expressions on their urls and this func should be defined on model's class
+                with using reverse func, both get_absolute_url and product:feature works same-->
+                <!-- <a href="{{item.get_absolute_url}}">{{item}}</a> -->
+                <a href="{% url 'products:feature' item.slug%}">{{item}}</a>
+            </li>
+            
+        </ul>
     
 
     {% endfor %}
-</body>
-</html>
+    </div>
+    
+{%endblock content%}

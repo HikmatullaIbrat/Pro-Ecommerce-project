@@ -1,52 +1,40 @@
-<!DOCTYPE html>
-{% load static%}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends 'base.html' %}
+{% load static %}
+{% block manual_css_for_page %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Contact</title>
+{% endblock manual_css_for_page %}
 
-    <link rel="stylesheet" href="{%static 'bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{%static 'css/style.css' %}">
-    <title>Contact Page</title>
-</head>
-<body>
-    <h4>{{first_name}}</h4>
-    <h4>{{content}}</h4>
+ {% block content %}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-6 col-12">
+    <div class="container-fluid" style = 'margin-top:5rem;'>
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                <h4>{{first_name}}</h4>
+                <h4>{{content}}</h4>
 
-            <!--but instead of this we can make a better Django validated form with Forms.form-->
-            <!-- <form action="" class="form" method="POST">
-                {% csrf_token %}
-                Full Name:<input type="text"class="form-control" name="firstname" id="firstname">
-                Email: <input type="text"class="form-control" name="email" id="email">
-                Message: <textarea class="form-control" name="message" placeholder="Your message"></textarea>
-                <button type="submit" class="btn btn-secondary">send</button>
-            </form> -->
+                <!--but instead of this we can make a better Django validated form with Forms.form-->
+                <!-- <form action="" class="form" method="POST">
+                    {% csrf_token %}
+                    Full Name:<input type="text"class="form-control" name="firstname" id="firstname">
+                    Email: <input type="text"class="form-control" name="email" id="email">
+                    Message: <textarea class="form-control" name="message" placeholder="Your message"></textarea>
+                    <button type="submit" class="btn btn-secondary">send</button>
+                </form> -->
 
-            <!--so we just write-->
-            <div >
-                <img src="{% static 'img/capture.png' %}" alt="there is a picture" sizes="" srcset="">
-                <p class="test">this is for testing...</p>
+                <!--so we just write-->
+                <div >
+                    <img src="{% static 'img/capture.png' %}" alt="there is a picture" sizes="" srcset="">
+                    <p class="test">this is for testing...</p>
+                </div>
+                <form action="" method="post" class ='form'>
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit" class="btn btn-secondary">send</button>
+                </form>
+            
             </div>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form}}
-                <button type="submit" class="btn btn-secondary">send</button>
-            </form>
-           
         </div>
     </div>
-</div>
 
-    
-
-<script src="{% static 'jquery.min.js' %}"></script>
-<script src="{% static 'popper.min.js' %}"></script>
-<script src="{% static 'bootstrap.min.js' %}"></script>
-    
-</body>
-</html>
+ {% endblock content %}
