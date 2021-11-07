@@ -15,13 +15,13 @@
     <!-- <img src="bird.jpg" alt="logo" style="width:40px;"> -->
   <!--Note: We can use both url values of first line on page links inside the collapse div like Home or 'home'-->
   </a>
-  <button class="navbar_toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+  <button class="navbar_toggler ml-sm-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
   aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar_toggler-icon"></span>
   </button>
   
   <!-- Links -->
-    <div class="collapse navbar-collapse" id = 'navbarSupportedContent'>
+    <div class="collapse navbar-collapse " id = 'navbarSupportedContent'>
         <ul class="navbar-nav mr-sm-5">
             <li class="nav-item {% if request.path == Home %} active {% endif %}">
                 <a class="nav-link" href="{% url 'home' %}">HOME <span class="sr-only">(current)</span></a>

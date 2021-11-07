@@ -1,4 +1,4 @@
-<div class="card" style = "width: 20rem;">
+<div class="card mb-sm-3" style = "width: 20rem;">
     {%if instance.image %}
     <img src="{{ instance.image.url }}" alt="" class="card-img-top" style = 'width:200px; height:200px;'>
     {%endif%}
@@ -8,7 +8,7 @@
             <h5>{{instance.price}}</h5>
         </div>
         <p class="card-text">
-        {{instance.description}} Some quick example text to build on the card title and make up the bulk of
+        {{instance.description| truncatewords:15 }} Some quick example text to build on the card title and make up the bulk of
         card's content.
         </p>
         
