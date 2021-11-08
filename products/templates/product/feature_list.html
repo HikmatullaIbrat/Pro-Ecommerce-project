@@ -6,24 +6,28 @@
 
  {% block content %}
     <div class="container" style = "margin-top: 5rem;">
-     {%for item in object_list%}
-        <ul>
+        <ul>{%for item in object_list%}
+        
             <li>
+                {%comment 'Some optional note'%}
                 <!-- that first href commented line's value which is an ID, will be still passed but won't be shown-->
                 <!-- so we can use it to pass a value hidely -->
-                <!-- <a href="{% url 'products:feature' item.id%}">{{item}}</a> -->
-                <!--  -->
+                
+               <!-- <a href="{% url 'feature' item.id%}">{{item}}</a> -->
+                
                 <!-- Defining a func like get_absolute_url is more effecient for getting items with
                 having regex expressions on their urls and this func should be defined on model's class
                 with using reverse func, both get_absolute_url and product:feature works same-->
                 <!-- <a href="{{item.get_absolute_url}}">{{item}}</a> -->
+                {% endcomment %}
                 <a href="{% url 'products:feature' item.slug%}">{{item}}</a>
             </li>
             
+            {% endfor %}
         </ul>
     
 
-    {% endfor %}
+    
     </div>
     
 {%endblock content%}

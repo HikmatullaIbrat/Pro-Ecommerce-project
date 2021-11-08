@@ -7,12 +7,19 @@
         <div class="row">
             
             {% for item in object_list %}
-
+            
             <div class="col">
+                <span>{{forloop.counter}}</span>
                 {% include 'product/listcard/card.html' with instance=item%}
+                {%comment 'Some optional note'%}
                 <!-- <a href="{% url 'products:detail' item.slug%}">{{item}}</a> -->
+                {% endcomment %}
+                {% if forloop.counter|divisibleby:2 %}
+                </div></div><div class="row"><div class="col-12"><hr /></div>
+                {% else %}
             </div>
-            {%endfor%}
+                {% endif %}
+            {% endfor%}
         </div> <!--row-->
     </div> <!--container-->
   {%endblock%}
