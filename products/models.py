@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import os
 import random
+from django.db.models import Q
 
 # Create your models here.
 # remember that every model must be registered on admin.py
@@ -33,6 +34,14 @@ class ProductQuerySet(models.query.QuerySet):
         return self.filter(active = True)
     def featured(self):
         return self.filter(featured = True, active = True)
+        # for searching the products on searchbar
+    def search(self,query):
+        lookups = (Q(title__icontains = query) |
+                  Q(description__icontains = query)|
+                  Q(price__icontains = query)
+        )
+        return self.filter(lookups).distinct()
+    
 class ProductManager(models.Manager):
     def get_queryset(self):
         return ProductQuerySet(self.model, using=self._db)
@@ -46,6 +55,13 @@ class ProductManager(models.Manager):
         if qs.count() ==1:
             return qs.first()
         return None
+
+    def search(self, query):
+        return self.get_queryset().active().search(query)
+    
+
+   
+
 
 
 # Product table  components
