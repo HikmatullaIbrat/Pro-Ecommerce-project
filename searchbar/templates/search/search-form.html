@@ -1,0 +1,9 @@
+<!--The Search form on navbar.html or other places-->
+<form class="form my-2 my-lg-0" action="{% url 'searchbar:query' %}">
+    <div class="input-group">
+        <input class="form-control" type="text" name = 'q' placeholder="Search" value= '{{query}}'>
+        <span class="input-group-btn">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </span>
+    </div>
+</form>

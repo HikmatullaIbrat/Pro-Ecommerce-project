@@ -55,7 +55,7 @@ def contact_page(request):
 
 
 
-    return render(request, 'contact/view.html', mydict)
+    return render(request, 'contact/cantact.html', mydict)
 
 
 def login_page(request):

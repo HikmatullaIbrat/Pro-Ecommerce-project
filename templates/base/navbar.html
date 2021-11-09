@@ -53,11 +53,9 @@
                 <a class="nav-link" href="{{ Register }}">Register</a>
             </li>
             {% endif %}
-        
-            <form class="form-inline ml-3" action="">
-                <input class="form-control" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-1 ml-sm-3" type="submit">Search</button>
-            </form>
+
+            {% include 'search/search-form.html' %}
+            
        </ul>
     </div>
     
