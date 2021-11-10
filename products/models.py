@@ -4,6 +4,7 @@ import os
 import random
 from django.db.models import Q
 
+
 # Create your models here.
 # remember that every model must be registered on admin.py
 
@@ -38,7 +39,8 @@ class ProductQuerySet(models.query.QuerySet):
     def search(self,query):
         lookups = (Q(title__icontains = query) |
                   Q(description__icontains = query)|
-                  Q(price__icontains = query)
+                  Q(price__icontains = query) |
+                  Q(tag__title__icontains=query)
         )
         return self.filter(lookups).distinct()
     
