@@ -11,6 +11,10 @@ def home_page(request):
     #return HttpResponse('<h1>Hello world!</h1>')
     content = 'Hello Afghanistan'  
     #return HttpResponse(content)  
+
+    # getting the session with the provided name on carts view, 
+    # unknown is a default value if user not have been recongnized
+    print(request.session.get('first_name','unknown'))
     mydict = {
         'firstName':'Hikmat',
         'content': 'Welcome to the home page'
