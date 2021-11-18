@@ -5,6 +5,7 @@
 {% url 'products:feature-list' as Featured %}
 {% url 'login' as Login_url %}
 {% url 'register' as Register %}
+{% url 'carts:cart_home' as Cart %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="{% url 'home' %}">
@@ -40,6 +41,11 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item {% if request.path == Cart %} active {% endif %}">
+                <a class="nav-link" href="{% url 'carts:cart_home' %}">
+                    
+                    {{request.session.cart_items}} <i class="fas fa-shopping-cart" aria-hidden="true"></i> </a>
+            </li>
             {%if request.user.is_authenticated %}
 
             <li class="nav-item {% if request.path == Login_url %} active {% endif %}">

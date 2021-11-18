@@ -2,6 +2,45 @@
 {% block content%}
     <div class="container" style = 'margin-top: 5rem;'>
         <h3>Welcome to Carts Managment</h3>
-    </div>
+   
+
+{% if cart.products.exists%}
+<table class="table">
+    <thead>
+            <tr> <th>Product Number</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for product in cart.products.all %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>
+                 <a href="{{product.get_absolute_url}}">{{product.title}}</a> 
+                {% include 'product/listcard/update-cart.html' with product=product cart=cart in_cart=True%}
+            </td>
+            <td>{{product.price}}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2"></td>
+            <td><b>Total</b> {{cart.total}}</td>
+            
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td><b>Tax total</b> {{cart.Tax_total}}</td>
+            
+        </tr>
+       
+    </tbody>
+</table>
+{% else %}
+
+<span class="badge badge-secondary"> <p>Product Doesn't exist</p></span>
+{%endif%}
    
 {% endblock%}
+
+</div><!--container-->

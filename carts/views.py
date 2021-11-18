@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views.generic import TemplateView
 from .models import Cart
+from products.models import Product
+
 # Create your views here.
 class CartHome(TemplateView):
     template_name = 'carts/home.html'
     
-def cart_create(user=None):
-    cart_obj = Cart.objects.create(user=None)
-    print('New cart created')
+# def cart_create(user=None):
+#     cart_obj = Cart.objects.create(user=None)
+#     print('New cart created')
 
 def cart_home(request):
     # print(request.session)
@@ -21,7 +23,7 @@ def cart_home(request):
     #cart_id = request.session.get('cart_id',None)
     
     # To get the session for cart
- 
+    #request.sessoin['cart_id'] = 12
     # checking whether session exists
    
     # if no session found so we create session
@@ -45,17 +47,28 @@ def cart_home(request):
     #         request.session['cart_id'] = cart_obj.id
 
     # return render(request, 'carts/home.html', {})
-      cart_id = request.session.get('cart_id',None)
-    qs= Cart.objects.filter(id = cart_id)
-    if qs.count() == 1:
-        # print('Cart ID exists')
-        cart_obj = qs.first()
-        # if user comes to carts page and session saving for him after he logged in so session will also be 
-                 # saved with his name
-        if request.user.is_authenticated and cart_obj.user is None:
-            cart_obj.user = request.user
-            cart_obj.save()
-    else:
-        cart_obj = Cart.objects.new(user = request.user)
-        request.session['cart_id'] = cart_obj.id
-    return render(request, 'carts/home.html', {})  
+    # with below to lines we carried all the upper session controlling code to model new_or_get() method
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    return render(request, 'carts/home.html', {"cart":cart_obj})
+
+def cart_update(request):
+    print(request.POST)
+    # This is the id of product which should be shown on /carts/update
+    product_id = request.POST.get('product_id')
+    if product_id is not None:
+        try:
+            product_obj = Product.objects.get(id = product_id)
+        except Product.DoesNotExist: 
+            print('Show message to user, product is gone?')
+            return redirect('carts:cart_home')
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
+        if product_obj in cart_obj.products.all():
+            cart_obj.products.remove(product_obj)
+        else:
+            cart_obj.products.add(product_obj) # cart_obj.products.add(product_obj)
+        request.session['cart_items'] = cart_obj.products.count()
+        
+    # 1 first way by reversing
+    # return redirect(product_obj.get_absolute_url())
+    # 2 second way by namespace
+    return redirect('carts:cart_home')

@@ -22,7 +22,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from carts.views import cart_home, CartHome
+# from carts.views import cart_home, CartHome
 
 from .views import home_page, about_page, product_page, contact_page, login_page, register_page
 
@@ -37,8 +37,9 @@ urlpatterns = [
     path('register/',register_page, name = 'register'),
     path(r'products/',include(('products.urls','products'),namespace='products')),
     path(r'search/',include(('searchbar.urls','searchbar'),namespace='searchbar')),
+     path(r'carts/',include(('carts.urls','carts'),namespace='carts')),
     #path(r'carts/',include(('carts.urls','carts'),namespace='carts')),
-    path(r'carts/', cart_home,name='cart'),
+    # path(r'carts/', cart_home,name='cart'),
     # path(r'carts/', CartHome.as_view(),name='cart'),
 
 ]
