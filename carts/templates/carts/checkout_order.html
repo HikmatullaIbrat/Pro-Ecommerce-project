@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container" style="margin-top: 5rem;">
+    <h1>Checkout</h1>
+    <p>Cart Total: {{order_obj.cart.total}}</p>
+    <p>Shipping Total: {{order_obj.shipping_total}}</p>
+    <p>Order Total: {{order_obj.total}}</p>
+</div>
+{% endblock content%}

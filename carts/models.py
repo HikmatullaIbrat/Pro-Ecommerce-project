@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save, m2m_changed
+import math
 # Create your models here.
 
 from products.models import Product
@@ -30,7 +31,7 @@ class CartManager(models.Manager):
 
     def new(self, user=None):
         user_obj = None
-        print(user.is_authenticated)
+        # (user.is_authenticated)
         if user is not None:
             if user.is_authenticated:
                 user_obj=user
@@ -68,7 +69,10 @@ m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 # The total with tax
 def pre_save_cart_receiver(sender, instance, *args, **kwargs):
     if instance.total > 0:
-        instance.Tax_total = instance.total + 10
+        #new_total =  math.fsum([instance.total, 10])
+        #instance.Tax_total = format(new_total,'.2f')
+        # eight percent Tax: we used float function to avoid the decimal.float error
+        instance.Tax_total = float(instance.total) * float(1.08)
     else:
         instance.Tax_total = 0.00
 
