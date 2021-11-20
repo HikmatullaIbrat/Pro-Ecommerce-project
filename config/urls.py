@@ -21,10 +21,11 @@ from django.urls import path
 # should'nt be used on Production
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 # from carts.views import cart_home, CartHome
-
-from .views import home_page, about_page, product_page, contact_page, login_page, register_page
+from accounts.views import login_page , register_page
+from .views import home_page, about_page, product_page, contact_page 
 
 urlpatterns = [
     path('admin/' , admin.site.urls),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('contact/',contact_page,name = 'contact'),
     path('login/',login_page , name='login'),
     path('register/',register_page, name = 'register'),
+    path('logout/',LogoutView.as_view(), name = 'logout'),
     path(r'products/',include(('products.urls','products'),namespace='products')),
     path(r'search/',include(('searchbar.urls','searchbar'),namespace='searchbar')),
      path(r'carts/',include(('carts.urls','carts'),namespace='carts')),

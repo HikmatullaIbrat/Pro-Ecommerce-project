@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'searchbar',
     'tags',
     'carts',
-    'orders'
+    'orders',
+    'accounts',
    
 ]
 
@@ -141,4 +142,4 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn', 'static_root
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'

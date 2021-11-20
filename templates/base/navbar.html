@@ -5,6 +5,7 @@
 {% url 'products:feature-list' as Featured %}
 {% url 'login' as Login_url %}
 {% url 'register' as Register %}
+{% url 'logout' as Logout %}
 {% url 'carts:cart_home' as Cart %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <!-- Brand/logo -->
@@ -48,8 +49,8 @@
             </li>
             {%if request.user.is_authenticated %}
 
-            <li class="nav-item {% if request.path == Login_url %} active {% endif %}">
-                <a class="nav-link" href="{% url 'login' %}">Logout</a>
+            <li class="nav-item {% if request.path == Logout %} active {% endif %}">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
             {% else %}
             <li class="nav-item {% if request.path == Login_url %} active {% endif %}">

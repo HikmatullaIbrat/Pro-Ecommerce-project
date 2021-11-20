@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate , login ,get_user_model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import ContactForm, LoginForm, RegisterationForm
+from .forms import ContactForm
 
 
 # View for Login and registration and 
@@ -62,49 +62,3 @@ def contact_page(request):
     return render(request, 'contact/contact.html', mydict)
 
 
-def login_page(request):
-    login_form = LoginForm(request.POST or None)
-    print('user is logged in')
-    #print(request.user.is_authenticated())
-    pass_username_password = {
-        'form' : login_form
-    }
-    if login_form.is_valid():
-        print(login_form.cleaned_data) # displays values of login_form like username and password
-        username = login_form.cleaned_data.get('user_name')
-        password = login_form.cleaned_data.get('password')
-
-        user = authenticate(request, username = username, password = password)
-
-        print(user)
-
-        if user is not None:
-            login(request, user)
-
-            return redirect('/')  # redirect to home page
-        else:
-            print('Error')
-
-
-    
-    return render(request, 'auth/login.html', pass_username_password)
-
-
-User = get_user_model()
-
-def register_page(request):
-    register_form = RegisterationForm(request.POST or None)
-
-    user_data = {
-        'form': register_form
-    }
-    if register_form.is_valid():
-        print(register_form.cleaned_data)
-        username =  register_form.cleaned_data.get('username')
-        email = register_form.cleaned_data.get('email')
-        password = register_form.cleaned_data.get('password')
-
-        new_user = User.objects.create_user(username,email,password)
-        print(new_user)
-
-    return render(request, 'auth/register.html', user_data)
