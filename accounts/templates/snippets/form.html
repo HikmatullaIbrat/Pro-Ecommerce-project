@@ -1,0 +1,16 @@
+<div class="container" style = "margin-top: 5rem;">
+    <!-- <form action="{% url 'login' %}" method="post" class = 'form'> -->
+    <form action="{% if action_url %}{{action_url}} {% else %}{% url 'login' %}{%endif  %}" method="post" class = 'form'>
+
+        <div class="form-group">
+            {% if next_url %}
+            <input type="hidden" name="next" value="{{next_url}}">
+            {% endif %}
+            {% csrf_token %}
+            {{ form}}  <!--we can use both methods which are in this way or in login page for form loading-->
+            <button type="submit" class="btn btn-secondary">send</button>
+        </div>
+        
+        
+    </form>
+</div>

@@ -1,13 +1,22 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+class GuestForm(forms.Form):
+     email = forms.EmailField(
+         widget=forms.EmailInput(
+             attrs={
+                 'class': 'form-control col-12 col-lg-6',
+                 'placeholder': 'Guest Email'
+             }
+         )
+     )
 
 class LoginForm(forms.Form):
 
     user_name = forms.CharField( # making the input for full name
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control col-12 col-lg-6',
                 'placeholder': 'User Name'
             }
         )
@@ -15,7 +24,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(
         attrs={
-            'class': 'form-control',
+            'class': 'form-control col-12 col-lg-6',
             'placeholder': 'Password'
             }
         )
