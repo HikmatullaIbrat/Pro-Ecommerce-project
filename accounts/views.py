@@ -39,9 +39,9 @@ def login_page(request):
     #print('user is logged in')
     #print(request.user.is_authenticated())
     # next keyword is used on urls to redirect to the specified url which assigned to next
-    # next_ = request.GET.get('next')
-    # next_post = request.POST.get('next')
-    # redirect_path = next_ or next_post or None
+    next_ = request.GET.get('next')
+    next_post = request.POST.get('next')
+    redirect_path = next_ or next_post or None
     pass_username_password = {
         'form' : login_form
     }
@@ -56,14 +56,18 @@ def login_page(request):
 
         if user is not None:
             login(request, user)
+            try:
+                del request.session['guest_email_id']
+            except:
+                pass
 
             return redirect('/')  # redirect to home page
 
             # we can use is_safe_url with this method
-            # if is_safe_url(redirect_path, request.get_host()):
-            #     return redirect(redirect_path)
-            # else:
-            #     return redirect('/')  # redirect to home page
+            if is_safe_url(redirect_path, request.get_host()):
+                return redirect(redirect_path)
+            else:
+                return redirect('/')  # redirect to home page
             
         else:
             print('Error')
