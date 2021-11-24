@@ -1,0 +1,14 @@
+
+    <form action="{% if action_url %}{{action_url}} {% else %}{% url 'login' %}{%endif  %}" method="post" class = 'form'>
+
+        <div class="form-group">
+            {% if address_type %}
+            <input type="hidden" name="address_type" value="{{address_type}}">
+            {% endif %}
+            {% csrf_token %}
+            {{ form.as_p }}  <!--we can use both methods which are in this way or in login page for form loading-->
+            <button type="submit" class="btn btn-secondary">send</button>
+        </div>
+        
+        
+    </form>
