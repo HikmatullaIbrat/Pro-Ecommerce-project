@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render , redirect
 from django.views.generic import TemplateView
 from .models import Cart
@@ -18,7 +19,23 @@ class CartHome(TemplateView):
 #     cart_obj = Cart.objects.create(user=None)
 #     print('New cart created')
 
+def cart_detail_api_view(request):
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    products = [{
+                "id":x.id,
+                'name':x.title,
+                'price':x.price,
+                "url": x.get_absolute_url(),
+                }
+    
+     for x in cart_obj.products.all()]
+    cart_data = {'products':products, 'Tax_total':cart_obj.Tax_total, 'total':cart_obj.total}
+    return JsonResponse(cart_data)
+
+
 def cart_home(request):
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    return render(request, 'carts/home.html', {"cart":cart_obj})
     # print(request.session)
     # print(dir(request.session))
     # print(request.session.session_key)
@@ -55,13 +72,13 @@ def cart_home(request):
 
     # return render(request, 'carts/home.html', {})
     # with below to lines we carried all the upper session controlling code to model new_or_get() method
-    cart_obj, new_obj = Cart.objects.new_or_get(request)
-    return render(request, 'carts/home.html', {"cart":cart_obj})
+    
 
 def cart_update(request):
-    print(request.POST)
+    # print(request.POST)
     # This is the id of product which should be shown on /carts/update
     product_id = request.POST.get('product_id')
+    
     if product_id is not None:
         try:
             product_obj = Product.objects.get(id = product_id)
@@ -71,9 +88,21 @@ def cart_update(request):
         cart_obj, new_obj = Cart.objects.new_or_get(request)
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
+            added = False
         else:
             cart_obj.products.add(product_obj) # cart_obj.products.add(product_obj)
+            added = True
         request.session['cart_items'] = cart_obj.products.count()
+
+        if request.is_ajax():
+            print('Ajax reuest')
+            # ajax message with json to pass whether product added or not to cart
+            json_data = {
+                'added':added,
+                'removed':not added,
+                'navbarCartItemsCount':cart_obj.products.count()
+            }
+            return JsonResponse(json_data)
         
     # 1 first way by reversing
     # return redirect(product_obj.get_absolute_url())
@@ -83,6 +112,7 @@ def cart_update(request):
 def checkout_home(request):
     cart_obj, cart_created = Cart.objects.new_or_get(request)
     order_obj = None
+    
     if cart_created or cart_obj.products.count() == 0:
         return redirect('carts:cart_home')
     # else:
@@ -127,13 +157,13 @@ def checkout_home(request):
         if shipping_address_id:         
             order_obj.shipping_address = Address.objects.get(id=shipping_address_id)
             del request.session['shipping_address_id']
-            print('this is shipping deleted')
+            # print('this is shipping deleted')
         if billing_address_id:
             order_obj.billing_address = Address.objects.get(id=billing_address_id)
             del request.session['billing_address_id']
-            print('this is billing deleted')
+            # print('this is billing deleted')
         if billing_address_id or shipping_address_id:
-            print('kkkkkkkkkkkkk',billing_address_id, shipping_address_id)
+            # print('kkkkkkkkkkkkk',billing_address_id, shipping_address_id)
             order_obj.save()
         # if order_qs.count() == 1:
         #     order_obj = order_qs.first()

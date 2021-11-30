@@ -8,8 +8,17 @@ from carts.models import Cart
 
 #class based view for listing products
 class ProductListView(ListView):
-    queryset = Product.objects.all()
+    # queryset = Product.objects.all()
     template_name = 'product/list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductListView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.all()
 
 
 # Function base view for listing products:
@@ -38,7 +47,7 @@ class ProductDetailView(DetailView):
     object.title or object.description"""
     def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
-        print(context)
+        # print(context)
         #context['object_list'] = queryset
         return context
 

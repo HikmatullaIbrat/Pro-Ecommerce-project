@@ -8,10 +8,10 @@ from .models import Address
 
 #if we want to reuse an address which is already exists or used for other orders
 def checkout_address_reuse_view(request):
-     """this request 'checkout_address_create' comes from central urls by to this view,
-      by checkout_order.html page and this func work based
-      on that request and sends  the data to checkout view on carts and after that carts' 
-     checkout view sends the data back to checkout_order.html"""
+    """this request 'checkout_address_create' comes from central urls by to this view,
+    by checkout_order.html page and this func work based
+    on that request and sends  the data to checkout view on carts and after that carts' 
+    checkout view sends the data back to checkout_order.html"""
     if request.user.is_authenticated:
         # next keyword is used on urls to redirect to the specified url which assigned to next
         next_ = request.GET.get('next')

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    .description{
+        height:300px;
+        width: 200px;
+    }
+</style>
+    <title>Jquery Practive</title>
+</head>
+
+<body>
+     
+    <form action="/home/" method="POST" class='new-content-form'>
+        <textarea name="message" id="" cols="30" rows="10"  placeholder="you message"></textarea>
+        <input type="submit" value="Save">
+    </form>
+
+    <p class="formData"></p>
+    <p class="formDataSubmitted"></p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <p id="first">Hello Afghanistan,</p>
+    <p id="second">Hello Afghanistan,</p>
+    <p id="firstid" class='hello'>Hello Afghanistan,</p>
+    <p id="firstid">Hello Afghanistan,</p>
+    <p id="firstid">Hello Afghanistan,</p>
+    <p class="description" id = 'par1'>Paragraph 1</p>
+    <p id="par2"><a href="https://www.google.com/">Some Link</a></p>
+    <p class="description">Paragraph 2</p>
+    <p class="description">Pragraph 3</p>
+    <p class="description">Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
+        To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries.
+        Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme.
+        Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign.
+        Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.
+        Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
+        To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries.
+        Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme.
+        Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign.
+        Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.
+        Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
+        To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries.
+        Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme.
+        Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign.
+        Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.
+        
+        Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
+        To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries.
+        Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme.
+        Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign.
+        Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.</p>
+
+    <script src="jquery.min.js"></script>
+    <script >
+        $(document).ready(function(){
+            
+            // $des = $('.description')
+
+            // console.log($des.length) // if 1 then atleast one pragraph with this class exists, shows num of parag
+            // console.log($des.css('height')) //The height of text
+            // console.log($des.height()) // show actual number of paragraph height
+
+            // var num = 124
+            // var arr = [num,'some text', 333, 12, false, 2222]
+            // isFalse=false
+            // $.each(arr,function(index,obj){
+            //     console.log(index, obj)
+
+            //     if (obj % 2==0){
+            //         console.log(obj, 'is even')
+            //     }
+            //     else if (obj % 3 == 0){
+            //         console.log('divisible by 3')
+            //     }
+            //     else{
+            //         console.log(obj, index ,'is not even')
+            //     }
+            // })
+            setTimeout(function(){
+                $('body').css('background-color','lightgreen')
+                $('.hello').text('Sorry, Hello world')
+                $('#second').css('color', 'white').css('padding','3rem')
+                $('p:nth-child(4)').text('And How are you boys?!')
+
+            }, 2000)
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var $desItem = $('.description')
+
+            $.each($desItem,function(index,obj){
+                var $itsArray = $(this)
+                //console.log($itsArray) //The array of all properties for each paragraph with class description
+                var actualHeight = $itsArray[0].scrollHeight
+                var shouldBeHeight = $itsArray.height()
+                //console.log(actualHeight, shouldBeHeight)
+
+                if (actualHeight > shouldBeHeight+50){
+                    $itsArray.css('overflow-y', 'scroll')
+                }
+
+            })
+
+            // var $par = $('#par1')
+            // $par.click(function(event){
+            //     var $this = $(this)
+            //     //console.log($this) // shows all properties of #par1
+            //     console.log(event) // shows all properties about the click event of #par1
+            //     window.location.href = 'https://www.google.com/'
+            // })
+
+            var par2 = $('#par2 a')
+            par2.click(function(event){
+                // console.log(event)
+                event.preventDefault() // it means a:href is not doing its job then
+                var $this = $(this)
+                // console.log($this) // all properties of a:href link
+
+                var href = $this.attr('href') // get its href value
+                window.location.href =href
+            })
+            
+            var contentOfForm =  $('.new-content-form')
+            contentOfForm.submit(function(event){
+
+                var $this = $(this)
+                event.preventDefault()
+                // console.log(contentOfForm.serialize()) // same result with this
+                    console.log($this.serialize()) 
+
+                var Textarea = $(this).find('textarea') // find the tag!
+                // console.log(Textarea.val())  // gets the tag contents
+
+                $('.formData').text(Textarea.val())
+
+                var FormMethod = $this.attr('method')
+                var FormAction = $(this).attr('action')
+
+                var Data  = {
+                    'content':Textarea.val(),
+                    'method': FormMethod,
+                    'action':FormAction
+
+                }
+
+                $('.formDataSubmitted').text(Textarea.val()+ 'method is ' + FormMethod +" action page "+ FormAction)
+
+            })
+        })
+
+    </script>
+</body>
+</html>

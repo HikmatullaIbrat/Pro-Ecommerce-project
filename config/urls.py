@@ -26,6 +26,7 @@ from django.contrib.auth.views import LogoutView
 from accounts.views import login_page , register_page, guest_register_view
 from .views import home_page, about_page, product_page, contact_page 
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
+from carts.views import cart_detail_api_view
 
 urlpatterns = [
     path('admin/' , admin.site.urls),
@@ -46,6 +47,7 @@ urlpatterns = [
     #path(r'carts/',include(('carts.urls','carts'),namespace='carts')),
     # path(r'carts/', cart_home,name='cart'),
     # path(r'carts/', CartHome.as_view(),name='cart'),
+    path('api/cart/',cart_detail_api_view,name='api-cart')
 
 ]
 

@@ -1,4 +1,4 @@
-<div class="card mb-sm-3" style = "width: 20rem;">
+<div class="card mb-sm-3" style = "width: 25rem;">
     {%if instance.image %}
     <img src="{{ instance.image.url }}" alt="" class="card-img-top" style = 'width:200px; height:200px;'>
     {%endif%}
@@ -11,8 +11,17 @@
         {{instance.description| truncatewords:15}} Some quick example text to build on the card title and make up the bulk of
         card's content.
         </p>
-        
-        <a href="{% url 'products:detail' slug=instance.slug %}" class = 'btn btn-primary'>View</a>
     </div> <!--card-body-->
+    <div class="card-footer">
 
+        <div class="row">
+            <div class="col-6">
+                <a href="{% url 'products:detail' slug=instance.slug %}" class ='stretched-link card-link'>View</a>
+            </div>
+            <div class="col-6">
+               {% include 'product/listcard/update-cart.html' with product=instance cart=cart align=right%}
+            </div>
+        </div>
+                             
+    </div>
 </div>
