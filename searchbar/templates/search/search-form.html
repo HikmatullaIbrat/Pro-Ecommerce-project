@@ -1,5 +1,5 @@
 <!--The Search form on navbar.html or other places-->
-<form class="form my-2 my-lg-0" action="{% url 'searchbar:query' %}">
+<form class="form my-2 my-lg-0 search-form" action="{% url 'searchbar:query' %}">
     <div class="input-group">
         <input class="form-control" type="text" name = 'q' placeholder="Search" value= '{{query}}'>
         <span class="input-group-btn">

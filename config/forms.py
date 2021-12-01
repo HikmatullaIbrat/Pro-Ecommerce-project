@@ -33,11 +33,13 @@ class ContactForm(forms.Form):
 
     # and if we want to have our own validation so we write:   clean_input_type
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if not 'gmail.com' in email:     # email has to be gmail type
-            raise forms.ValidationError('Email has to be gmail.com')
-        return email
+    # def clean_email(self):
+    #     email = self.cleaned_data.get('email')
+    #     if not 'gmail.com' in email:     # email has to be gmail type
+    #         raise forms.ValidationError('Email has to be gmail.com')
+    #     return email
+    # def clean_Message(self):
+    #     raise forms.ValidationError('Content is Wrong')
 
 
 

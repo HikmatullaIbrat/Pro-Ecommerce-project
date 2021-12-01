@@ -7,32 +7,35 @@
 
  {% block content %}
 
-    <div class="container-fluid" style = 'margin-top:5rem;'>
+    <div class="container" style = 'margin-top:5rem;'>
         <div class="row">
-            <div class="col-sm-6 col-12">
-                <h4>{{first_name}}</h4>
-                <h4>{{content}}</h4>
-
-                <!--but instead of this we can make a better Django validated form with Forms.form-->
-                <!-- <form action="" class="form" method="POST">
-                    {% csrf_token %}
-                    Full Name:<input type="text"class="form-control" name="firstname" id="firstname">
-                    Email: <input type="text"class="form-control" name="email" id="email">
-                    Message: <textarea class="form-control" name="message" placeholder="Your message"></textarea>
-                    <button type="submit" class="btn btn-secondary">send</button>
-                </form> -->
-
-                <!--so we just write-->
-                <div >
-                    <img src="{% static 'img/capture.png' %}" alt="there is a picture" sizes="" srcset="">
-                    <p class="test">this is for testing...</p>
+            <div class="col">
+                <div class="col-md-6 col-12 form-group mx-auto">
+                    <h4>{{first_name}}</h4>
+                    <h4>{{content}}</h4>
+    
+                    <!--but instead of this we can make a better Django validated form with Forms.form-->
+                    <!-- <form action="" class="form" method="POST">
+                        {% csrf_token %}
+                        Full Name:<input type="text"class="form-control" name="firstname" id="firstname">
+                        Email: <input type="text"class="form-control" name="email" id="email">
+                        Message: <textarea class="form-control" name="message" placeholder="Your message"></textarea>
+                        <button type="submit" class="btn btn-secondary">send</button>
+                    </form> -->
+    
+                    <!--so we just write-->
+                    <!-- <div > -->
+                        <!-- <img src="{% static 'img/capture.png' %}" alt="there is a picture" sizes="" srcset=""> -->
+                        <!-- <p class="test">this is for testing...</p> -->
+                    <!-- </div> -->
+                    <form action="{% url 'contact' %}" method="post" class ='form contact-form'>
+                        <!--The above action for this form is added becuase of jQuery's data comming or testing-->
+                        {% csrf_token %}
+                        {{form}}
+                        <button type="submit" class="btn btn-secondary mt-sm-3">send</button>
+                    </form>
+                
                 </div>
-                <form action="" method="post" class ='form'>
-                    {% csrf_token %}
-                    {{form}}
-                    <button type="submit" class="btn btn-secondary">send</button>
-                </form>
-            
             </div>
         </div>
     </div>

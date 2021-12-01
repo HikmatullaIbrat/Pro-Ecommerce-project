@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate , login ,get_user_model
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .forms import ContactForm
 
@@ -47,8 +47,17 @@ def contact_page(request):
         'content': 'You can contact with us with filling below form',
         'form' : contact_form # we passed to dict that can be usable in view.html
     }
-
+    if contact_form.is_valid():
+        print(contact_form.cleaned_data)
+        if request.is_ajax():
+            return JsonResponse({'message':'Thank you'})
     
+    # if there is any error in form validation
+    if contact_form.errors:
+            errors = contact_form.errors.as_json()
+            if request.is_ajax():
+                return HttpResponse(errors, status=400, content_type='application/json')
+
 
     if request.method == 'POST':
         #print(request.POST) # for checking form data which can be displayed or not: it will output on cmd
