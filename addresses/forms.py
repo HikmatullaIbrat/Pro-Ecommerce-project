@@ -2,6 +2,7 @@ from django import forms
 from .models import Address
 
 class AddressForm(forms.ModelForm):
+    # this meta classes are used when we use the builtain form of Django with our own page
     class Meta:
         model = Address
         fields=[

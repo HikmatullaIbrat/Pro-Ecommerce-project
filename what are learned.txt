@@ -16,3 +16,8 @@ second question is the method of handling static files in production mode.
         #7. for deleting an item : all.first().delete() , all.last().delete() or manually all[0].delete()
         #8. if we want to manipulate the database with super suer we have to register our model on admin.py
          
+5. to backup the database the data we use dumpdata
+python manage.py dumpdata --format json --indent 4
+python manage.py dumpdata products.Product --format json --indent 4 >/file/path/
+and to load that data :
+python manage.py loaddata  /file/path/

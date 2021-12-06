@@ -8,7 +8,7 @@
     <form action="" method="post" class= "form">
         <div class="form-group">
             {% csrf_token %}
-            {{form}}
+            {{form.as_p}}
             <button type="submit" class="btn btn-secondary mt-sm-3">send</button>
         </div>
     </form>

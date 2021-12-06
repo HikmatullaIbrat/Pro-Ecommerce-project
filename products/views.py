@@ -4,17 +4,22 @@ from django.http import Http404
 from .models import Product, ProductManager
 from django.views.generic import ListView , DetailView
 from carts.models import Cart
+from django.core.paginator import Paginator
 
 
 #class based view for listing products
 class ProductListView(ListView):
     # queryset = Product.objects.all()
     template_name = 'product/list.html'
+    paginate_by = 2
+    
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data(*args, **kwargs)
         cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        print(context)
         context['cart'] = cart_obj
+    
         return context
     def get_queryset(self, *args, **kwargs):
         request = self.request

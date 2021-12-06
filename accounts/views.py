@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate , login ,get_user_model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django.views.generic import CreateView, FormView
 # is_safe_url is used to avoid redirecting to those urls which or not hosted with https
 from django.utils.http import  is_safe_url
 from .models import GuestEmailModel
@@ -33,65 +33,100 @@ def guest_register_view(request):
 
     return redirect('/register/')
 
-# Create login page views .
-def login_page(request):
-    login_form = LoginForm(request.POST or None)
-    #print('user is logged in')
-    #print(request.user.is_authenticated())
-    # next keyword is used on urls to redirect to the specified url which assigned to next
-    next_ = request.GET.get('next')
-    next_post = request.POST.get('next')
-    redirect_path = next_ or next_post or None
-    pass_username_password = {
-        'form' : login_form
-    }
-    if login_form.is_valid():
-        print(login_form.cleaned_data) # displays values of login_form like username and password
-        username = login_form.cleaned_data.get('user_name')
-        password = login_form.cleaned_data.get('password')
+# class based view for registration and login
+class LoginView(FormView):
+    form_class = LoginForm
+    success_url = '/'
+    template_name = 'auth/login.html'
 
-        user = authenticate(request, username = username, password = password)
-
-        print(user)
-
+    def form_valid(self, form):
+        request = self.request
+        next_   = request.GET.get('next')
+        next_post = request.POST.get('next')
+        redirect_path = next_ or next_post or None
+        # print('kkkkkkkkkkkkkkkkkkkkkkkkkk')
+        email = form.cleaned_data.get('email')
+        # print(email, 'This is email kllllllllllllllllllllllllll')
+        password = form.cleaned_data.get('password')
+        user = authenticate(request, username=email, password=password)
         if user is not None:
+            # print('funtionsssssssssssssss')
             login(request, user)
             try:
                 del request.session['guest_email_id']
             except:
                 pass
-
-            return redirect('/')  # redirect to home page
-
-            # we can use is_safe_url with this method
             if is_safe_url(redirect_path, request.get_host()):
                 return redirect(redirect_path)
             else:
-                return redirect('/')  # redirect to home page
+                return redirect('/')
+        return super(LoginView, self).form_invalid(form)
+
+class RegisterView(CreateView):
+    form_class = RegisterationForm
+    template_name = 'auth/register.html'
+    success_url = '/'
+
+# # Create login page views .
+# def login_page(request):
+#     login_form = LoginForm(request.POST or None)
+#     #print('user is logged in')
+#     #print(request.user.is_authenticated())
+#     # next keyword is used on urls to redirect to the specified url which assigned to next
+#     next_ = request.GET.get('next')
+#     next_post = request.POST.get('next')
+#     redirect_path = next_ or next_post or None
+#     pass_username_password = {
+#         'form' : login_form
+#     }
+#     if login_form.is_valid():
+#         print(login_form.cleaned_data) # displays values of login_form like username and password
+#         username = login_form.cleaned_data.get('user_name')
+#         password = login_form.cleaned_data.get('password')
+
+#         user = authenticate(request, username = username, password = password)
+
+#         print(user)
+
+#         if user is not None:
+#             login(request, user)
+#             try:
+#                 del request.session['guest_email_id']
+#             except:
+#                 pass
+
+#             return redirect('/')  # redirect to home page
+
+#             # we can use is_safe_url with this method
+#             if is_safe_url(redirect_path, request.get_host()):
+#                 return redirect(redirect_path)
+#             else:
+#                 return redirect('/')  # redirect to home page
             
-        else:
-            print('Error')
+#         else:
+#             print('Error')
 
 
     
-    return render(request, 'auth/login.html', pass_username_password)
+#     return render(request, 'auth/login.html', pass_username_password)
 
 
-User = get_user_model()
+# User = get_user_model()
 
-def register_page(request):
-    register_form = RegisterationForm(request.POST or None)
+# def register_page(request):
+#     register_form = RegisterationForm(request.POST or None)
 
-    user_data = {
-        'form': register_form
-    }
-    if register_form.is_valid():
-        print(register_form.cleaned_data)
-        username =  register_form.cleaned_data.get('username')
-        email = register_form.cleaned_data.get('email')
-        password = register_form.cleaned_data.get('password')
+#     user_data = {
+#         'form': register_form
+#     }
+#     if register_form.is_valid():
+#         # print(register_form.cleaned_data)
+#         # username =  register_form.cleaned_data.get('username')
+#         # email = register_form.cleaned_data.get('email')
+#         # password = register_form.cleaned_data.get('password')
 
-        new_user = User.objects.create_user(username,email,password)
-        print(new_user)
+#         # new_user = User.objects.create_user(username,email,password)
+#         # print(new_user)
+#         register_form.save()
 
-    return render(request, 'auth/register.html', user_data)
+#     return render(request, 'auth/register.html', user_data)

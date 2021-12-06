@@ -45,7 +45,7 @@ def checkout_address_create_view(request):
     redirect_path = next_ or next_post or None
     
     if form.is_valid():
-        print(request.POST)
+        # print(request.POST)
         #we can use is_safe_url with this method
         instance=form.save(commit=False)
         billing_profile , billing_profile_created = BillingProfile.objects.new_or_get(request)
@@ -56,7 +56,7 @@ def checkout_address_create_view(request):
             # print('Every thing is good dddddddddddddddd')
             instance.save()
             request.session[address_type + '_address_id'] = instance.id
-            print(address_type + '_address_id')
+            # print(address_type + '_address_id')
         else:
             print('error here')
             return redirect('carts:checkout') 

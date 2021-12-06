@@ -23,7 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 # from carts.views import cart_home, CartHome
-from accounts.views import login_page , register_page, guest_register_view
+from accounts.views import guest_register_view, LoginView, RegisterView #login_page , register_page, 
 from .views import home_page, about_page, product_page, contact_page 
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
 from carts.views import cart_detail_api_view
@@ -35,8 +35,10 @@ urlpatterns = [
     path(r'about/', about_page, name='about'),
     #path('products/', product_page),
     path('contact/',contact_page,name = 'contact'),
-    path('login/',login_page , name='login'),
-    path('register/',register_page, name = 'register'),
+    # path('login/',login_page , name='login'),
+    # path('register/',register_page, name = 'register'),
+    path('login/',LoginView.as_view() , name='login'),
+    path('register/',RegisterView.as_view(), name = 'register'),
     path('guest/register/',guest_register_view, name = 'guest_register'),
     path('logout/',LogoutView.as_view(), name = 'logout'),
     path(r'products/',include(('products.urls','products'),namespace='products')),
