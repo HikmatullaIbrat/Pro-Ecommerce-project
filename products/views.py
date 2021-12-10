@@ -5,7 +5,8 @@ from .models import Product, ProductManager
 from django.views.generic import ListView , DetailView
 from carts.models import Cart
 from django.core.paginator import Paginator
-
+# import custom user defined signals use them so that when user see any product can be detected 
+from analytics.mixins import ObjectViewedMixin
 
 #class based view for listing products
 class ProductListView(ListView):
@@ -17,7 +18,7 @@ class ProductListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data(*args, **kwargs)
         cart_obj, new_obj = Cart.objects.new_or_get(self.request)
-        print(context)
+        # print(context)
         context['cart'] = cart_obj
     
         return context
@@ -42,7 +43,7 @@ def product_list_view(request):
 
 #class based detail view for listing products:
 
-class ProductDetailView(DetailView):
+class ProductDetailView(ObjectViewedMixin,DetailView):
     queryset = Product.objects.all()
     template_name = 'product/detail.html'
 
@@ -90,7 +91,7 @@ class FeaturedProductsListView(ListView):
 
 # class base view for featured products' details with their identity number on url
 
-class FeaturedProductsDetailView(DetailView):
+class FeaturedProductsDetailView(ObjectViewedMixin,DetailView):
     template_name = 'product/feature.html'
     
     def get_queryset(self, *args, **kwargs):
@@ -99,7 +100,7 @@ class FeaturedProductsDetailView(DetailView):
 
 
 # class for showing products with their names on url
-class ProductDetailSlugView(DetailView):
+class ProductDetailSlugView(ObjectViewedMixin, DetailView):
     queryset = Product.objects.all()
     template_name = 'product/detail.html'
     def get_context_data(self, *args, **kwargs):
@@ -121,4 +122,6 @@ class ProductDetailSlugView(DetailView):
             instance = qs.first()
         except:
             raise Http404('so may it exists')
+
+        # object_viewed_signal.send(instance.__class__, instance=instance, request=request)
         return instance

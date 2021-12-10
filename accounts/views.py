@@ -6,6 +6,7 @@ from django.views.generic import CreateView, FormView
 # is_safe_url is used to avoid redirecting to those urls which or not hosted with https
 from django.utils.http import  is_safe_url
 from .models import GuestEmailModel
+from .signals import user_logged_in
 
 from .forms import  LoginForm, RegisterationForm, GuestForm
 # Create guest logging views here.
@@ -50,6 +51,8 @@ class LoginView(FormView):
         password = form.cleaned_data.get('password')
         user = authenticate(request, username=email, password=password)
         if user is not None:
+            # A signal is triggered when user logged in
+            user_logged_in.send(user.__class__, instance=user, request=request)
             # print('funtionsssssssssssssss')
             login(request, user)
             try:
