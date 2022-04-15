@@ -65,11 +65,11 @@ class GuestForm(forms.Form):
 
 class LoginForm(forms.Form):
 
-    email = forms.EmailField( # making the input for full name
+    email = forms.EmailField( # making the input for email
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control col-12 col-lg-6',
-                'placeholder': 'User Name'
+                'placeholder': 'email'
             }
         )
     )

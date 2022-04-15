@@ -89,7 +89,6 @@ def user_logged_in_receiver(sender, instance, request, *args, **kwargs):
         ip_address=ip_address,
         session_key=session_key
     )
-    \
 
 
     

@@ -70,6 +70,7 @@ class User(AbstractBaseUser):
 
     REQUIRED_FIELDS = ['full_name'] #[]
     USERNAME_FIELD = 'email'
+    
     # USERNAME FIELD AND PASSWORD ARE REQUIRED BY DEFAULT
    
     
